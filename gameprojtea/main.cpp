@@ -1,4 +1,5 @@
 #include "menugame.h"
+#include "menugame.h"
 using namespace sf;
 
 int main() {
