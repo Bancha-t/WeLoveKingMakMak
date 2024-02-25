@@ -1,78 +1,63 @@
-#pragma once
-#include "Player.h"
 #include <SFML/Graphics.hpp>
-#include <iostream>
+#include "Player.h"
+#include "Enemy.h"
 using namespace sf;
+
 class Game
 {
-private:
-	RenderWindow window;
-	VideoMode videomode;
-	Texture bg;
-	Sprite bgg;
-	Player player;
-
-	void mainwindow();
-	void loadbgg();
 public:
-	Game();
-	virtual ~Game();
+    Game();
+    virtual ~Game();
 
-	void updateevent();
-	void update();
-	void render(RenderWindow& window);
-	void run();
+    void update();
+    void render();
+    void run();
+
+private:
+    RenderWindow window;
+    Event event;
+    Player player;
+
+    void initWindow();
 };
 
-void Game::mainwindow() {
-	window.create(VideoMode(700, 400), "Heeyaiyai");
+void Game::initWindow()
+{
+    window.create(VideoMode(1600, 900), "Hee");
+    window.setFramerateLimit(60);
 }
 
-void Game::loadbgg() {
-	//bg.loadFromFile("C:/Users/User/Desktop/gamenaja/main/png/mapnaja.jpg");
-	//bgg.setTexture(bg);
+Game::Game() : player()
+{
+    initWindow();
 }
 
-Game::Game() {
-	loadbgg();
-	mainwindow();
+Game::~Game()
+{
 }
 
-Game::~Game() {
-
+void Game::update()
+{
+    while (window.pollEvent(event))
+    {
+        if (event.type == Event::Closed)
+            window.close();
+    }
+    player.update();
 }
 
-void Game::updateevent() {
-	Event event;
-	while (window.pollEvent(event))
-	{
-		if (event.type == Event::Closed) {
-			window.close();
-		}
-	}
-}
-void Game::update() {
-	updateevent();
+void Game::render()
+{
+    window.clear();
+    player.render(window);
+    window.display();
 }
 
-void Game::render(RenderWindow& window) {
-	window.clear();
-	window.draw(bgg);
-	player.render(window);
-	window.display();
-}
-
-void Game::run() {
-	while (window.isOpen()) {
-		Event event;
-		while (window.pollEvent(event)) {
-			if (event.type == Event::Closed) {
-				window.close();
-			}
-		}
-
-		window.clear();
-		render(window);
-		window.display();
-	}
+void Game::run()
+{
+    while (window.isOpen())
+    {
+        update();
+        render();
+    }
 }

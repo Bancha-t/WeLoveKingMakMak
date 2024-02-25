@@ -1,61 +1,83 @@
-#pragma once
 #include <SFML/Graphics.hpp>
+#include "Enemy.h"
+#include <iostream>
 using namespace sf;
+
 class Player
 {
-private:
-	float moveSpeed;
-	int hpplayer;
-	Texture player;
-	Sprite playergame;
 public:
-	Player();
-	virtual ~Player();
+    Player();
+    virtual ~Player();
 
-	void move(Vector2f direction);
-	void update();
-	void render(RenderTarget& Target);
+    void update();
+    void render(RenderTarget& target);
+    void run(RenderWindow& window);
+
+    Vector2f getPosition() const;
+private:
+    int speedplayer;
+    CircleShape player;
+
+    void setPlayer();
+    void moveFunc();
+
 };
 
+void Player::setPlayer() {
+    player = CircleShape(10.f);
+    player.setFillColor(Color::Red);
+    player.setPosition(800.f, 450.f);
+    speedplayer = 5.0f;
+}
+
 Player::Player() {
-	player.loadFromFile("C:/Users/User/Desktop/gamenaja/main/pngremo.png");
-	playergame.setTexture(player);
-	moveSpeed = 5.0f;
-}
-Player::~Player()
-{
-
+    setPlayer();
 }
 
-void Player::move(Vector2f direction) {
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-	{
-		playergame.move(moveSpeed, 0.f);
-	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-	{
-		playergame.move(-moveSpeed, 0.f);
-	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-	{
-		playergame.move(0.f, -moveSpeed);
-	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-	{
-		playergame.move(0.f, moveSpeed);
-	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::q)) {
+Player::~Player() {
+}
 
-	}
+void Player::moveFunc() {
+    if (Keyboard::isKeyPressed(Keyboard::D)) {
+        player.move(speedplayer, 0.f);
+    }
+    if (Keyboard::isKeyPressed(Keyboard::A)) {
+        player.move(-speedplayer, 0.f);
+    }
+    if (Keyboard::isKeyPressed(Keyboard::W)) {
+        player.move(0.f, -speedplayer);
+    }
+    if (Keyboard::isKeyPressed(Keyboard::S)) {
+        player.move(0.f, speedplayer);
+    }
 }
 
 void Player::update() {
-	
+    moveFunc();
 }
 
-void Player::render(RenderTarget& Target) {
-	Target.draw(playergame);
+void Player::render(RenderTarget& target) {
+    target.draw(player);
 }
 
+void Player::run(RenderWindow& window) {
+    while (window.isOpen()) {
+        Event event;
+        while (window.pollEvent(event)) {
+            if (event.type == Event::Closed) {
+                window.close();
+            }
+        }
 
+        update();
 
+        window.clear();
+        render(window);
+        window.display();
+    }
+}
+
+Vector2f Player::getPosition() const {
+    Vector2f playerPosition = player.getPosition();
+    return playerPosition;
+}
