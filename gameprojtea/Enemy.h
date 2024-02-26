@@ -1,107 +1,69 @@
-#pragma once
-#define TYPEENEMY 5
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include <cstdlib>
-#include <cmath>
-#include <string>
 
 using namespace sf;
 
 class Enemy
 {
-private:
-    CircleShape enemy[TYPEENEMY];
-    int HP[TYPEENEMY];
-    int damage[TYPEENEMY];
-    int point[TYPEENEMY];
-    Vector2f playerPosition;
-
-    void MoveEnemy(Vector2f playerPosition);
-    void RendEnemy();
-
 public:
-    Enemy(Vector2f playerPosition);
-    virtual ~Enemy();
+	Enemy(float posx, float posy);
+	virtual ~Enemy();
 
-    void CreateEnemy(Vector2f playerPosition);
-    void update();
-    void render(RenderTarget& target);
+	void update(const Vector2f& playerPosition);
+	void render(RenderTarget& target) const;
+	Vector2f getPosition() const;
+
+private:
+	CircleShape enemy;
+	int HP;
+	int HPMAX;
+	int DAMAGE;
+	int POINT;
+	float speedenemy;
+
+	void setenemy();
+	void intvariables();
 };
 
-void Enemy::CreateEnemy(Vector2f playerPosition)
-{
-    for (int i = 0; i < TYPEENEMY; i++)
-    {
-        RendEnemy();
-
-        enemy[i].setPosition(playerPosition.x + i * 50.f, playerPosition.y);
-    }
+void Enemy::setenemy() {
+	enemy.setRadius(rand() % 20 + 20);
+	enemy.setPointCount(rand() % 100 + 3);
+	enemy.setFillColor(Color(rand() % 200 + 1, rand() % 255 + 2, rand() % 255 + 3, 255));
 }
 
-void Enemy::RendEnemy()
-{
-    int type = rand() % TYPEENEMY;
-    if (type == 0)
-    {
-        enemy[0].setFillColor(Color::Red);
-        HP[0] = 50;
-    }
-    else if (type == 1)
-    {
-        enemy[1].setFillColor(Color::Yellow);
-        HP[1] = 60;
-    }
-    else if (type == 2)
-    {
-        enemy[2].setFillColor(Color::Blue);
-        HP[2] = 70;
-    }
-    else if (type == 3)
-    {
-        enemy[3].setFillColor(Color::Cyan);
-        HP[3] = 80;
-    }
-    else if (type == 4)
-    {
-        enemy[4].setFillColor(Color::Green);
-        HP[4] = 100;
-    }
+void Enemy::intvariables() {
+	HP = rand() % 50 + 100;
+	HPMAX = 100;
+	DAMAGE = rand() % 5 + 20;
+	POINT = 1;
+	speedenemy = 10.f;
 }
 
-Enemy::Enemy(Vector2f playerPosition)
+Enemy::Enemy(float posx, float posy)
 {
-    this->playerPosition = playerPosition;
-    CreateEnemy(playerPosition);
+	setenemy();
+	intvariables();
+	enemy.setPosition(posx, posy);
 }
 
 Enemy::~Enemy()
 {
 }
 
-void Enemy::MoveEnemy(Vector2f playerPosition)
-{
-    for (int i = 0; i < TYPEENEMY; ++i)
-    {
-        Vector2f direction = playerPosition - enemy[i].getPosition();
-        float magnitude = std::sqrt(direction.x * direction.x + direction.y * direction.y);
-        if (magnitude > 1e-5)
-        {
-            direction /= magnitude;
-            enemy[i].move(direction * 0.3f);
-        }
-    }
+void Enemy::update(const Vector2f& playerPosition) {
+
+	Vector2f direction = playerPosition - enemy.getPosition();
+
+	float length = sqrt(direction.x * direction.x + direction.y * direction.y);
+	direction /= length;
+
+	enemy.move(direction * speedenemy);
 }
 
-void Enemy::update()
-{
-    MoveEnemy(playerPosition);
+void Enemy::render(RenderTarget& target) const {
+	target.draw(enemy);
 }
 
-void Enemy::render(RenderTarget& target)
-{
-    for (int i = 0; i < TYPEENEMY; ++i)
-    {
-        target.draw(enemy[i]);
-    }
+Vector2f Enemy::getPosition() const {
+	return enemy.getPosition();
 }

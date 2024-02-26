@@ -1,5 +1,4 @@
 #include <SFML/Graphics.hpp>
-#include "Enemy.h"
 #include <iostream>
 using namespace sf;
 
@@ -16,6 +15,8 @@ public:
     Vector2f getPosition() const;
 private:
     int speedplayer;
+    int HP;
+    int HPMAX;
     CircleShape player;
 
     void setPlayer();
@@ -27,7 +28,7 @@ void Player::setPlayer() {
     player = CircleShape(10.f);
     player.setFillColor(Color::Red);
     player.setPosition(800.f, 450.f);
-    speedplayer = 5.0f;
+    speedplayer = 20.0f;
 }
 
 Player::Player() {
@@ -68,9 +69,7 @@ void Player::run(RenderWindow& window) {
                 window.close();
             }
         }
-
         update();
-
         window.clear();
         render(window);
         window.display();
