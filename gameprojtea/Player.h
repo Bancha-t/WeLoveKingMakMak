@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include "Enemy.h"
 #include <iostream>
 using namespace sf;
 
@@ -11,15 +12,17 @@ public:
     void update();
     void render(RenderTarget& target);
     void run(RenderWindow& window);
+    int setintvariablesPlayer();
+
+
 
     Vector2f getPosition() const;
 private:
-    int speedplayer;
-    int HP;
-    int HPMAX;
     CircleShape player;
-
     void setPlayer();
+    float speedplayer;
+    int Hp;
+    int Damage;
     void moveFunc();
 
 };
@@ -28,7 +31,15 @@ void Player::setPlayer() {
     player = CircleShape(10.f);
     player.setFillColor(Color::Red);
     player.setPosition(800.f, 450.f);
-    speedplayer = 20.0f;
+    speedplayer = 15.0f;
+    Hp = 100;
+    Damage = 5;
+}
+
+int Player::setintvariablesPlayer() {
+    int hpPlayer = Hp;
+    int DamagePlayer = Damage;
+    return hpPlayer, DamagePlayer;
 }
 
 Player::Player() {
@@ -39,6 +50,7 @@ Player::~Player() {
 }
 
 void Player::moveFunc() {
+
     if (Keyboard::isKeyPressed(Keyboard::D)) {
         player.move(speedplayer, 0.f);
     }
@@ -51,6 +63,7 @@ void Player::moveFunc() {
     if (Keyboard::isKeyPressed(Keyboard::S)) {
         player.move(0.f, speedplayer);
     }
+
 }
 
 void Player::update() {
@@ -69,7 +82,9 @@ void Player::run(RenderWindow& window) {
                 window.close();
             }
         }
+
         update();
+
         window.clear();
         render(window);
         window.display();

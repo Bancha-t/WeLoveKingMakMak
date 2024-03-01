@@ -16,6 +16,7 @@ public:
     void render();
     void run();
 
+    View view;
 private:
     RenderWindow window;
     Event event;
@@ -31,37 +32,55 @@ void Game::initWindow()
 {
     window.create(VideoMode(1600, 900), "Hee");
     window.setFramerateLimit(60);
+    view.setCenter(player.getPosition());
 }
+
 void Game::intenemy() {
-    float distanceThreshold = 20.0f;
 
-    for (int i = 0; i < 10; ++i) {
-        float posX = 20.f * i;
-        float posY = 20.f * i;
+    float distanceThreshold = 10.0f;
 
-        bool isValidPosition = true;
-        for (const auto& existingEnemy : enemies) {
-            Vector2f existingPosition = existingEnemy.getPosition();
-            float distance = sqrt((posX - existingPosition.x) * (posX - existingPosition.x) +
-                (posY - existingPosition.y) * (posY - existingPosition.y));
+    for (int i = 0; i < 5; ++i) {
+        bool isValidPosition = false;
+        float posX, posY;
 
-            if (distance < distanceThreshold) {
+        while (!isValidPosition) {
+            posX = static_cast<float>(rand() % (window.getSize().x - 40) + 20);
+            posY = static_cast<float>(rand() % (window.getSize().y - 40) + 20);
+
+            isValidPosition = true;
+
+            Vector2f playerPosition = player.getPosition();
+            float distanceToPlayer = sqrt((posX - playerPosition.x) * (posX - playerPosition.x) +
+                (posY - playerPosition.y) * (posY - playerPosition.y));
+
+            if (distanceToPlayer < distanceThreshold) {
                 isValidPosition = false;
-                break;
+                continue;
+            }
+            for (const auto& existingEnemy : enemies) {
+                Vector2f existingPosition = existingEnemy.getPosition();
+                float distance = sqrt((posX - existingPosition.x) * (posX - existingPosition.x) +
+                    (posY - existingPosition.y) * (posY - existingPosition.y));
+
+                if (distance < distanceThreshold) {
+                    isValidPosition = false;
+                    break;
+                }
+            }
+            if (!isValidPosition) {
+                continue;
             }
         }
 
-        if (isValidPosition) {
-            enemies.push_back(Enemy(posX, posY));
-        }
+        enemies.push_back(Enemy(posX, posY));
     }
 }
 
 
 Game::Game() : player(), enemy(20.f, 20.f)
 {
-    intenemy();
     initWindow();
+    intenemy();
 }
 
 Game::~Game()
@@ -69,8 +88,19 @@ Game::~Game()
 }
 
 void Game::updateenemy(const Vector2f& playerPosition) {
+
+    player.setintvariablesPlayer();
     for (auto& enemy : enemies) {
         enemy.update(playerPosition);
+        Vector2f enemyPosition = enemy.getPosition();
+
+    }
+
+    if (enemy.getPosition().x < player.getPosition().x + 10 && enemy.getPosition().x + 20 > player.getPosition().x && enemy.getPosition().y < player.getPosition().y + 10 && enemy.getPosition().y + 20 > player.getPosition().y) {
+        player.setintvariablesPlayer();
+        int hpPlayer = player.setintvariablesPlayer();
+        hpPlayer -= enemy.getDamage();
+        player.setintvariablesPlayer();
     }
 }
 
