@@ -1,5 +1,4 @@
 #include <SFML/Graphics.hpp>
-#include "Enemy.h"
 #include <iostream>
 using namespace sf;
 
@@ -12,34 +11,49 @@ public:
     void update();
     void render(RenderTarget& target);
     void run(RenderWindow& window);
-    int setintvariablesPlayer();
-
-
 
     Vector2f getPosition() const;
 private:
-    CircleShape player;
+    int speedplayer;
+    int HP;
+    int HPMAX;
+    int animationFrame;
+    int sx;
+    int sy;
+    Texture playertexture;
+    Sprite player;
+
+    Texture maptexture;
+    Sprite map;
+
+    //CircleShape player;
+
     void setPlayer();
-    float speedplayer;
-    int Hp;
-    int Damage;
     void moveFunc();
 
 };
 
 void Player::setPlayer() {
-    player = CircleShape(10.f);
-    player.setFillColor(Color::Red);
-    player.setPosition(800.f, 450.f);
-    speedplayer = 15.0f;
-    Hp = 100;
-    Damage = 5;
-}
+    //player = CircleShape(10.f);
+    //player.setFillColor(Color::Red);
+    if (!maptexture.loadFromFile("C:/Users/User/Desktop/gamenaja/main/png/mapgame.png")) {
+        std::cout << "Error loading texture: mapgame.png" << std::endl;
+    }
+    map.setTexture(maptexture);
+    map.setPosition(0, 0);
 
-int Player::setintvariablesPlayer() {
-    int hpPlayer = Hp;
-    int DamagePlayer = Damage;
-    return hpPlayer, DamagePlayer;
+    if (!playertexture.loadFromFile("C:/Users/User/Desktop/gamenaja/main/png/playergame.png")) {
+        std::cout << "Error loading texture: playergame.png" << std::endl;
+    }
+    player.setTexture(playertexture);
+    sx = playertexture.getSize().x / 3;
+    sy = playertexture.getSize().y / 4;
+    player.setTextureRect(IntRect(0, 0, sx, sy));
+    animationFrame = 0;
+
+
+    player.setPosition(800.f, 450.f);
+    speedplayer = 20.0f;
 }
 
 Player::Player() {
@@ -50,20 +64,24 @@ Player::~Player() {
 }
 
 void Player::moveFunc() {
-
     if (Keyboard::isKeyPressed(Keyboard::D)) {
         player.move(speedplayer, 0.f);
+        player.setTextureRect(IntRect(sx * animationFrame, sy * 2, sx, sy));
+
     }
     if (Keyboard::isKeyPressed(Keyboard::A)) {
         player.move(-speedplayer, 0.f);
+        player.setTextureRect(IntRect(sx * animationFrame, sy * 1, sx, sy));
+
     }
     if (Keyboard::isKeyPressed(Keyboard::W)) {
         player.move(0.f, -speedplayer);
+        player.setTextureRect(IntRect(sx * animationFrame, sy * 3, sx, sy));
     }
     if (Keyboard::isKeyPressed(Keyboard::S)) {
         player.move(0.f, speedplayer);
+        player.setTextureRect(IntRect(sx * animationFrame, 0, sx, sy));
     }
-
 }
 
 void Player::update() {
@@ -82,9 +100,7 @@ void Player::run(RenderWindow& window) {
                 window.close();
             }
         }
-
         update();
-
         window.clear();
         render(window);
         window.display();

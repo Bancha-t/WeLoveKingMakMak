@@ -1,3 +1,4 @@
+
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <vector>
@@ -32,11 +33,9 @@ void Game::initWindow()
 {
     window.create(VideoMode(1600, 900), "Hee");
     window.setFramerateLimit(60);
-    view.setCenter(player.getPosition());
 }
 
 void Game::intenemy() {
-
     float distanceThreshold = 10.0f;
 
     for (int i = 0; i < 5; ++i) {
@@ -89,18 +88,13 @@ Game::~Game()
 
 void Game::updateenemy(const Vector2f& playerPosition) {
 
-    player.setintvariablesPlayer();
     for (auto& enemy : enemies) {
         enemy.update(playerPosition);
         Vector2f enemyPosition = enemy.getPosition();
-
     }
 
     if (enemy.getPosition().x < player.getPosition().x + 10 && enemy.getPosition().x + 20 > player.getPosition().x && enemy.getPosition().y < player.getPosition().y + 10 && enemy.getPosition().y + 20 > player.getPosition().y) {
-        player.setintvariablesPlayer();
-        int hpPlayer = player.setintvariablesPlayer();
-        hpPlayer -= enemy.getDamage();
-        player.setintvariablesPlayer();
+
     }
 }
 
