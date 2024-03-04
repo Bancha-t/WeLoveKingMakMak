@@ -31,7 +31,7 @@ public:
 private:
 	int HP;//Enemy's health points
 	int HPMAX;
-	int DAMAGE;
+	int damage;
 	int POINT;
 	int NewHp;
 	int health;
