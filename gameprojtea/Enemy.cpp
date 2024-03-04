@@ -8,6 +8,7 @@ void Enemy::setenemy() {
 	}
 
 	enemy.setTexture(enemytexture);
+	enemy.setOrigin(0.f, 0.f);
 	enemy.setScale(0.1f, 0.1f);
 }
 
@@ -43,7 +44,7 @@ void Enemy::getHealth() {
 }
 
 void Enemy::update(const Vector2f& playerPosition) {
-	const float distanceThreshold = 500.0f;
+	const float distanceThreshold = 400.0f;
 
 	int randomDirection = rand() % 4;
 

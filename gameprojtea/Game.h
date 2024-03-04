@@ -19,17 +19,13 @@ public:
     void update();
     void render();
     void run();
-
     View view;
 private:
     RenderWindow window;
     Event event;
     Player player;
     UIgame ui;
-
-    //RectangleShape backgroundgame;
-    //Texture maptexture;
-    //Sprite map;
+    
     std::vector<Enemy> enemies;
     Enemy enemy;
     sf::Clock enemySpawnClock;

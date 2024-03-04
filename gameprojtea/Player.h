@@ -10,6 +10,8 @@ class Player
 public:
     Player();
     virtual ~Player();
+    //void sword();//New sword object
+    //void enemy();
 
     int getHealth() const;
     void takeDamage(int damage);
@@ -33,6 +35,7 @@ private:
     int spriteX;
     int spriteY;
     Enemy enemy;
+
     sf::Texture playerTexture;
     sf::Sprite playerSprite;
     sf::Texture swordTexture;

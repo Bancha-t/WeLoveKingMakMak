@@ -78,13 +78,17 @@ void Game::update()
         if (event.type == Event::Closed)
             window.close();
     }
+
     player.update();
     updateenemy(player.getPosition());
+
+
     if (enemySpawnClock.getElapsedTime().asSeconds() >= enemySpawnInterval) {
         intenemy();
         enemySpawnClock.restart();
     }
 }
+
 
 void Game::render()
 {

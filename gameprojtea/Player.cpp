@@ -5,6 +5,7 @@ void Player::setSword() {
     }
     swordSprite.setTexture(swordTexture);
     swordSprite.setScale(0.075f, 0.075f);
+    //swordSprite.setOrigin(swordTexture.getSize().x, swordTexture.getSize().y); 
     swordSprite.setPosition(playerSprite.getPosition().x, playerSprite.getPosition().y);
 }
 void Player::setmap() {
@@ -68,7 +69,6 @@ void Player::moveFunc()
         playerSprite.setTextureRect(sf::IntRect(spriteX * animationFrame, 0, spriteX, spriteY));
     }
 
-    // Check for collision with the frame
     sf::FloatRect playerBounds = playerSprite.getGlobalBounds();
     sf::FloatRect frameBounds(0.f, 0.f, 1600, 900);
 
