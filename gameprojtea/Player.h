@@ -13,8 +13,17 @@ public:
     int getHealth() const;
     void takeDamage(int damage);
     void update();
-    void render(sf::RenderTarget& target);
+    void render(sf::RenderTarget& target){
+        target.draw(swordSprite);
+    }
     void run(sf::RenderWindow& window);
+    void setSword(const std::string&texturePath)){
+        if(!swordTexture.loadFromFile(texturePath)){
+            std::cout<<"Error loading sword texture"<<std::endl;//Handle error
+        }
+        swordSrite.setTexture(swordTexture);//Positon the sword relative to the player
+    swordSprite.setPosition(playerSprite.getPosition().x + 50.f,playerSprite.getPosition().y - 20.f);
+    }  
     sf::Vector2f getPosition() const;
 
 private:
@@ -26,11 +35,11 @@ private:
     int spriteY;
     sf::Texture playerTexture;
     sf::Sprite playerSprite;
+    sf::Texture swordTexture;
+    sf::Sprite swordSprite;
 
     void setPlayer();
     void moveFunc();
 };
 
 #endif // PLAYER_H
-
-
