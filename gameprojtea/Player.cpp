@@ -18,7 +18,7 @@ void Player::setPlayer()
 
 Player::Player() : speedPlayer(10.0f), health(100), damage(10), animationFrame(0), spriteX(0), spriteY(0)
 {
-    setPlayer();//Set up the sword after the player is created
+    setPlayer();
     sword.setSword("C:/Users/User/Desktop/gamenaja/main/png/sword.png");
 }
 

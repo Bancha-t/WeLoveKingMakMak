@@ -17,13 +17,13 @@ public:
         target.draw(swordSprite);
     }
     void run(sf::RenderWindow& window);
-    void setSword(const std::string&texturePath)){
-        if(!swordTexture.loadFromFile(texturePath)){
-            std::cout<<"Error loading sword texture"<<std::endl;//Handle error
+    void setSword(const std::string& texturePath) {
+        if (!swordTexture.loadFromFile(texturePath)) {
+            std::cout << "Error loading sword texture" << std::endl;
         }
-        swordSprite.setTexture(swordTexture);//Positon the sword relative to the player
-    swordSprite.setPosition(playerSprite.getPosition().x + 50.f,playerSprite.getPosition().y - 20.f);
-    }  
+        swordSprite.setTexture(swordTexture);
+        swordSprite.setPosition(playerSprite.getPosition().x + 50.f, playerSprite.getPosition().y - 20.f);
+    }
     sf::Vector2f getPosition() const;
 
 private:
