@@ -11,7 +11,6 @@ void Enemy::setenemy() {
 	enemy.setOrigin(0.f, 0.f);
 	enemy.setScale(0.1f, 0.1f);
 }
-
 void Enemy::intvariables() {
 	HP = rand() % 50 + 100;
 	HPMAX = 100;

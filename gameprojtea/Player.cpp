@@ -6,7 +6,7 @@ void Player::setSword() {
     }
     swordSprite.setTexture(swordTexture);
     swordSprite.setScale(0.075f, 0.075f);
-    //swordSprite.setOrigin(swordTexture.getSize().x, swordTexture.getSize().y); 
+    swordSprite.setOrigin(swordTexture.getSize().x, swordTexture.getSize().y); 
     swordSprite.setPosition(playerSprite.getPosition().x, playerSprite.getPosition().y);
 }
 void Player::setmap() {

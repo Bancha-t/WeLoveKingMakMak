@@ -16,6 +16,8 @@ public:
 
 private:
     RectangleShape HPbar;
+    Font font;
+    Text nameplayer;
     int playerHealth;
     int playerMaxHealth;
     void setPlayerHealth(int health);

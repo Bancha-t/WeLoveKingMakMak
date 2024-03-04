@@ -26,7 +26,7 @@ public:
     //void attackEnemy(Enemy& enemy);
     sf::Vector2f getPosition() const;
     sf::RectangleShape swordHitbox;
-
+    void setframe();
 private:
     float speedPlayer;
     int health;
@@ -35,7 +35,9 @@ private:
     int spriteX;
     int spriteY;
     Enemy enemy;
-
+    sf::Clock frameClock;
+    bool drawFrame;
+    sf::RectangleShape frame;
     sf::Texture playerTexture;
     sf::Sprite playerSprite;
     sf::Texture swordTexture;

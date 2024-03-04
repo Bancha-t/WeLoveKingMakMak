@@ -11,6 +11,13 @@ void UIgame::setUIgame() {
     playertext1.setTexture(playertext);
     playertext1.setScale(0.20f, 0.20f);
     playertext1.setPosition(20.f, 20.f);
+    
+    font.loadFromFile("C:/Users/User/Desktop/gameprojtea/font/Sobiscuit.ttf");
+    nameplayer.setFont(font);
+    nameplayer.setString("Score");
+    nameplayer.setFillColor(Color::Black);
+    nameplayer.setPosition(91.f, 20.f);
+
 
 }
 

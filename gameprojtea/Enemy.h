@@ -12,15 +12,14 @@ public:
 	Enemy(float posx, float posy);
 	//void returnenemydamage(int);
 	//void returnenemyHP(int);
-	Enemy(int initialHealth):HP(initialHealth);//Function to reduce enemy's health when hit
+	//Enemy(int initialHealth):HP(initialHealth);
 	virtual ~Enemy();
 	int getDamage() const;
 	void takeDamage(int);
 	void reduceHealth(int damage){
 		HP -= damage;
 		if(HP<=0){
-			std::count<<"Enemy defeated!"<<std::endl;
-			delete this;//Delete the enemy if health is zero
+			delete this;
 		}
 	}
 	void getHealth();
