@@ -9,6 +9,8 @@ class Player
 public:
     Player();
     virtual ~Player();
+    void sword();//New sword object
+    void enemy();
 
     int getHealth() const;
     void takeDamage(int damage);
