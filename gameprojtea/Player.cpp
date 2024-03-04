@@ -16,10 +16,12 @@ void Player::setPlayer()
     playerSprite.setPosition(800.f, 450.f);
 }
 
-Player::Player() : speedPlayer(10.0f), health(100), damage(0), animationFrame(0), spriteX(0), spriteY(0)
+Player::Player() : speedPlayer(10.0f), health(100), damage(10), animationFrame(0), spriteX(0), spriteY(0)
 {
-    setPlayer();
+    setPlayer();//Set up the sword after the player is created
+    sword.setSword("C:/Users/User/Desktop/gamenaja/main/png/sword.png");
 }
+
 
 Player::~Player()
 {
@@ -70,8 +72,9 @@ void Player::render(sf::RenderTarget& target)
     target.draw(playerSprite);
 }
 
+
 void Player::run(sf::RenderWindow& window)
-{
+{//Handle player's movements and actions in the game loop
     while (window.isOpen())
     {
         sf::Event event;
@@ -82,11 +85,24 @@ void Player::run(sf::RenderWindow& window)
                 window.close();
             }
         }
-        update();
+        update(enemy);//Pass the Enemy reference to update player and check attack
         window.clear();
-        render(window);
+        render(window,enemy);//Pass the windowand the enemy to render
         window.display();
     }
+}
+
+void update(Enemy&enemy){
+    moveFunc();
+    attackEnemy(enemy);
+
+}
+
+void render(sf::RenderTarget&target, Enemy&enemy){
+    target.draw(playerSprite);
+    sword.render(target);//Render the sword
+    //Render the enemy as well
+    enemy.render(target);
 }
 
 sf::Vector2f Player::getPosition() const {
