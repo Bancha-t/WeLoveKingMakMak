@@ -12,16 +12,23 @@ public:
 	Enemy(float posx, float posy);
 	//void returnenemydamage(int);
 	//void returnenemyHP(int);
-
+	Enemy(int initialHealth):HP(initialHealth);//Function to reduce enemy's health when hit
 	virtual ~Enemy();
 	int getDamage() const;
 	void takeDamage(int);
+	void reduceHealth(int damage){
+		HP -= damage;
+		if(HP<=0){
+			std::count<<"Enemy defeated!"<<std::endl;
+			delete this;//Delete the enemy if health is zero
+		}
+	}
 	void getHealth();
 	void update(const Vector2f& playerPosition);
 	void render(RenderTarget& target) const;
 	Vector2f getPosition() const;
 private:
-	int HP;
+	int HP;//Enemy's health points
 	int HPMAX;
 	int DAMAGE;
 	int POINT;
