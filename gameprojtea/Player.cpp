@@ -87,7 +87,7 @@ void Player::run(sf::RenderWindow& window)
         }
         update(enemy);//Pass the Enemy reference to update player and check attack
         window.clear();
-        render(window,enemy);//Pass the windowand the enemy to render
+        render(window,enemy);//Pass the window and the enemy to render
         window.display();
     }
 }
