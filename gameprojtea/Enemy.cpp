@@ -100,6 +100,10 @@ void Enemy::render(RenderTarget& target) const {
 	target.draw(borderRect);
 }
 
+void Enemy::takeDamage(int damage){
+	HP-=damage;//Reduce the enemy's health by the amount of damage
+}
+
 Vector2f Enemy::getPosition() const {
 	return enemy.getPosition();
 }
