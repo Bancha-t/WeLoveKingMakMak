@@ -143,9 +143,7 @@
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameUI.h" />
-    <ClInclude Include="Golem.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="UIgame.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

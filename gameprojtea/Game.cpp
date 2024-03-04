@@ -65,9 +65,6 @@ Game::~Game()
 void Game::updateenemy(const Vector2f& playerPosition) {
     for (auto& enemy : enemies) {
         enemy.update(playerPosition);
-        int damage = enemy.getDamage();
-        player.takeDamage(damage);
-        enemy.getHealth();
     }
 }
 

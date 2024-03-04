@@ -32,11 +32,11 @@ void Player::setPlayer()
     playerSprite.setPosition(800.f, 450.f);
 }
 
-Player::Player() : speedPlayer(10.0f), health(100), damage(10), animationFrame(0), spriteX(0), spriteY(0) ,enemy(20.f, 20.f)
+Player::Player() : speedPlayer(10.0f), health(100), damage(10), animationFrame(0), spriteX(0), spriteY(0) ,enemy(0.f, 0.f)
 {
     setPlayer();
     setmap();
-    //setSword();
+    setSword();
 }
 
 
@@ -46,7 +46,6 @@ Player::~Player()
 
 void Player::moveFunc()
 {
-    // Previous position before the move
     sf::Vector2f prevPosition = playerSprite.getPosition();
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
@@ -93,17 +92,6 @@ void Player::moveFunc()
     }
 }
 
-
-int Player::getHealth() const
-{
-    return health;
-}
-
-void Player::takeDamage(int damage)
-{
-    health = std::max(0, health - damage);
-}
-
 void Player::swingSword()
 {
     swordSprite.rotate(60.0f);
@@ -123,7 +111,7 @@ void Player::update()
 
     swordSprite.setPosition(playerPosition);
 
-    sf::Vector2f swordTipPosition = playerPosition + sf::Vector2f(15.f, -10.f);
+    sf::Vector2f swordTipPosition = playerPosition + sf::Vector2f(0.f, 0.f);
     swordSprite.setRotation(angle + 90.f);
     swordSprite.setPosition(swordTipPosition);
 
@@ -133,6 +121,7 @@ void Player::update()
     }
 
     setSword();
+
 }
 
 
@@ -141,13 +130,11 @@ void Player::render(sf::RenderTarget& target) {
     target.draw(map);
     target.draw(playerSprite);
     target.draw(swordSprite);
-    //sword.render(target);
-    //enemy.render(target);
 }
 
 
 void Player::run(sf::RenderWindow& window)
-{//Handle player's movements and actions in the game loop
+{
     while (window.isOpen())
     {
         sf::Event event;
@@ -158,21 +145,12 @@ void Player::run(sf::RenderWindow& window)
                 window.close();
             }
         }
-        update();//Pass the Enemy reference to update player and check attack
+        update();
         window.clear();
-        render(window);//Pass the window and the enemy to render
+        render(window);
         window.display();
     }
 }
-
-//void Player::attackEnemy(Enemy* enemy) {
-//    if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {//Perform attack and reduce enemy health
-//        enemy.takeDamage(damage);
-//        if (enemy.getHealth() <= 0) {//If enemy health is empty, delete enemy
-//            //Add code to delete the enemy
-//        }
-//    }
-//}
 
 sf::Vector2f Player::getPosition() const {
     return playerSprite.getPosition();

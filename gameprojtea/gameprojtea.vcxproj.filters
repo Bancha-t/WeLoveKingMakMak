@@ -47,11 +47,5 @@
     <ClInclude Include="GameUI.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Golem.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="UIgame.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>

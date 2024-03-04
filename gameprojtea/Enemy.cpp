@@ -30,18 +30,6 @@ Enemy::~Enemy()
 {
 }
 
-int Enemy::getDamage() const {
-	return DAMAGE;
-}
-
-void Enemy::takeDamage(int damage) {
-	 NewHp  =  HP - damage;
-}
-
-void Enemy::getHealth() {
-	HP = NewHp ;
-}
-
 void Enemy::update(const Vector2f& playerPosition) {
 	const float distanceThreshold = 400.0f;
 

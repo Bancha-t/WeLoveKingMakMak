@@ -16,7 +16,7 @@ void UIgame::setUIgame() {
     nameplayer.setFont(font);
     nameplayer.setString("P-ploy");
     nameplayer.setFillColor(Color::Black);
-    nameplayer.setPosition(160.f, 20.f);
+    nameplayer.setPosition(150.f, 20.f);
 
 
 }
@@ -34,7 +34,7 @@ void UIgame::setPlayerHealth(int health) {
 }
 
 void UIgame::update() {
-    int playerCurrentHealth = player.getHealth();
+    int playerCurrentHealth = 100;
 
     setPlayerHealth(playerCurrentHealth);
 
