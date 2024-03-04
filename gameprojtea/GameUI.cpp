@@ -14,9 +14,9 @@ void UIgame::setUIgame() {
     
     font.loadFromFile("C:/Users/User/Desktop/gameprojtea/font/Sobiscuit.ttf");
     nameplayer.setFont(font);
-    nameplayer.setString("Score");
+    nameplayer.setString("P-ploy");
     nameplayer.setFillColor(Color::Black);
-    nameplayer.setPosition(91.f, 20.f);
+    nameplayer.setPosition(160.f, 20.f);
 
 
 }
@@ -44,5 +44,6 @@ void UIgame::update() {
 
 void UIgame::render(RenderTarget& target) {
     target.draw(HPbar);
+    target.draw(nameplayer);
     target.draw(playertext1);
 }
