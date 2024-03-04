@@ -109,9 +109,8 @@ void update(Enemy&enemy){
 
 void render(sf::RenderTarget&target, Enemy&enemy){
     target.draw(playerSprite);
-    sword.render(target);//Render the sword
-    //Render the enemy as well
-    enemy.render(target);
+    sword.render(target);//Render the sword   
+    enemy.render(target);//Render the enemy as well
 }
 
 sf::Vector2f Player::getPosition() const {
