@@ -9,7 +9,7 @@ int main()
     RenderWindow window(VideoMode(1600, 900), "Main Menu");
 
     Font font;
-    if (!font.loadFromFile("Fonts/TherenRegular-vmrnE.ttf")) {
+    if (!font.loadFromFile("C:/Users/User/Desktop/gameprojtea/font/Sobiscuit.ttf")) {
         std::cerr << "Error loading font\n";
         return 1;
     }
@@ -17,22 +17,22 @@ int main()
     RectangleShape background;
     background.setSize(Vector2f(1600, 900));
     Texture Maintexture;
-    Maintexture.loadFromFile("Texture/Background.jpg");
+    Maintexture.loadFromFile("C:/Users/User/Desktop/gameprojtea/photo/welovetheking.jpg");
     background.setTexture(&Maintexture);
 
     RectangleShape Pbackground;
     Pbackground.setSize(Vector2f(1600, 900));
     Texture back_texture;
-    back_texture.loadFromFile("Texture/Play.jpg");
+    back_texture.loadFromFile("C:/Users/User/Desktop/gameprojtea/photo/welovetheking.jpg");
     Pbackground.setTexture(&back_texture);
 
-    Text title("Main Menu", font, 50);
-    title.setPosition(650.f, 200.f);
+    Text title("WELOVEKING", font, 100);
+    title.setPosition(520.f, 200.f);
 
-    Text playOption("Play", font, 30);
+    Text playOption("Play", font, 50);
     playOption.setPosition(750.f, 400.f);
 
-    Text exitOption("Exit", font, 30);
+    Text exitOption("Exit", font, 50);
     exitOption.setPosition(750.f, 500.f);
 
     while (window.isOpen())

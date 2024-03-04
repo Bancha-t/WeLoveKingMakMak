@@ -4,12 +4,14 @@ void UIgame::setUIgame() {
     HPbar.setSize(Vector2f(150.f, 20.f));
     HPbar.setFillColor(Color::Green);
     HPbar.setPosition(130.f, 80.f);
-    if (!playertext.loadFromFile("C:/Users/User/Desktop/gamenaja/main/png/playergamepos.png")) {
+
+    if (!playertext.loadFromFile("C:/Users/User/Desktop/gameprojtea/photo/playergamepos.png")) {
         std::cout << "Error loading texture: player_2.png" << std::endl;
     }
     playertext1.setTexture(playertext);
     playertext1.setScale(0.20f, 0.20f);
     playertext1.setPosition(20.f, 20.f);
+
 }
 
 UIgame::UIgame() {

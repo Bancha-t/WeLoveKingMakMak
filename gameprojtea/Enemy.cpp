@@ -1,9 +1,14 @@
 #include "Enemy.h"
 void Enemy::setenemy() {
-	if (!enemytexture.loadFromFile("C:/Users/User/Desktop/gamenaja/main/png/remo.png")) {
-		std::cout << "Error loading texture: player_2.png" << std::endl;
+	if (!enemytexture.loadFromFile("C:/Users/User/Desktop/gameprojtea/photo/1ZA.png")) {
+		std::cout << "Error loading texture: 1ZA.png" << std::endl;
 	}
+	else {
+		std::cout << "Texture loaded successfully" << std::endl;
+	}
+
 	enemy.setTexture(enemytexture);
+	enemy.setScale(0.1f, 0.1f);
 }
 
 void Enemy::intvariables() {
@@ -27,6 +32,14 @@ Enemy::~Enemy()
 
 int Enemy::getDamage() const {
 	return DAMAGE;
+}
+
+void Enemy::takeDamage(int damage) {
+	 NewHp  =  HP - damage;
+}
+
+void Enemy::getHealth() {
+	HP = NewHp ;
 }
 
 void Enemy::update(const Vector2f& playerPosition) {
@@ -76,9 +89,15 @@ void Enemy::update(const Vector2f& playerPosition) {
 	}
 }
 
-
 void Enemy::render(RenderTarget& target) const {
 	target.draw(enemy);
+	FloatRect enemyBounds = enemy.getGlobalBounds();
+	RectangleShape borderRect(Vector2f(enemyBounds.width, enemyBounds.height));
+	borderRect.setPosition(enemyBounds.left, enemyBounds.top);
+	borderRect.setFillColor(Color::Transparent);
+	borderRect.setOutlineColor(Color::Green);
+	borderRect.setOutlineThickness(2.0f);
+	target.draw(borderRect);
 }
 
 Vector2f Enemy::getPosition() const {

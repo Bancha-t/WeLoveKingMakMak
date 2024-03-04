@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <cmath>
+#include "Enemy.h"
 
 class Player
 {
@@ -12,19 +13,17 @@ public:
 
     int getHealth() const;
     void takeDamage(int damage);
+    void swingSword();
     void update();
-    void render(sf::RenderTarget& target){
-        target.draw(swordSprite);
-    }
+    void render(sf::RenderTarget& target);
     void run(sf::RenderWindow& window);
-    void setSword(const std::string& texturePath) {
-        if (!swordTexture.loadFromFile(texturePath)) {
-            std::cout << "Error loading sword texture" << std::endl;
-        }
-        swordSprite.setTexture(swordTexture);
-        swordSprite.setPosition(playerSprite.getPosition().x + 50.f, playerSprite.getPosition().y - 20.f);
-    }
+    void setSword();
+    //bool isCollision(const sf::Sprite& sprite1, const sf::Sprite& sprite2);
+    //void handlePlayerEnemyCollision();
+    void setmap();
+    //void attackEnemy(Enemy& enemy);
     sf::Vector2f getPosition() const;
+    sf::RectangleShape swordHitbox;
 
 private:
     float speedPlayer;
@@ -33,10 +32,14 @@ private:
     int animationFrame;
     int spriteX;
     int spriteY;
+    Enemy enemy;
     sf::Texture playerTexture;
     sf::Sprite playerSprite;
     sf::Texture swordTexture;
     sf::Sprite swordSprite;
+    sf::Texture maptextture;
+    sf::Sprite map;
+    sf::Clock animationClock;
 
     void setPlayer();
     void moveFunc();

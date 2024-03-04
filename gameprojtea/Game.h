@@ -1,6 +1,7 @@
 #ifndef GAME_H
 #define GAME_H
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include <iostream>
 #include <vector>
 #include "Player.h"
@@ -29,10 +30,10 @@ private:
     //RectangleShape backgroundgame;
     //Texture maptexture;
     //Sprite map;
-
     std::vector<Enemy> enemies;
     Enemy enemy;
     sf::Clock enemySpawnClock;
+    sf::Music backgroundMusic;
     const float enemySpawnInterval = 5.0f;
     void initWindow();
     void intenemy();

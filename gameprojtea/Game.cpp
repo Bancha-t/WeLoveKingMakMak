@@ -1,14 +1,15 @@
 #include "Game.h"
+
 void Game::initWindow()
 {
     window.create(VideoMode(1600, 900), "Hee");
     window.setFramerateLimit(60);
+    if (!backgroundMusic.openFromFile("song/yahallo.mp3")) {
+        std::cout << "Error loading song" << std::endl;
+    }
+    backgroundMusic.setVolume(25);
+    backgroundMusic.play();
 
-    //backgroundgame.setSize(Vector2f(1600, 900));
-    //if (!maptexture.loadFromFile("C:/Users/User/Desktop/gamenaja/main/png/mapgame.png")) {
-    //std::cout << "Error loading texture: mapgame.png" << std::endl;
-    //}
-    //map.setTexture(maptexture);
 }
 
 void Game::intenemy() {
@@ -58,20 +59,15 @@ Game::Game() : player(), enemy(20.f, 20.f)
 
 Game::~Game()
 {
+    backgroundMusic.stop();
 }
 
 void Game::updateenemy(const Vector2f& playerPosition) {
     for (auto& enemy : enemies) {
         enemy.update(playerPosition);
-
-        Vector2f enemyPosition = enemy.getPosition();
-        float distance = sqrt((enemyPosition.x - playerPosition.x) * (enemyPosition.x - playerPosition.x) +
-            (enemyPosition.y - playerPosition.y) * (enemyPosition.y - playerPosition.y));
-
-        if (distance < 20.0f) {
-            int damage = enemy.getDamage();
-            player.takeDamage(damage);
-        }
+        int damage = enemy.getDamage();
+        player.takeDamage(damage);
+        enemy.getHealth();
     }
 }
 

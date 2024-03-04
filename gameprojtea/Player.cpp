@@ -1,10 +1,24 @@
-#include "Player.h"
+﻿#include "Player.h"
+void Player::setSword() {
+    if (!swordTexture.loadFromFile("C:/Users/User/Desktop/gameprojtea/photo/sword.png")) {
+        std::cout << "Error loading sword texture" << std::endl;
+    }
+    swordSprite.setTexture(swordTexture);
+    swordSprite.setScale(0.075f, 0.075f);
+    swordSprite.setPosition(playerSprite.getPosition().x, playerSprite.getPosition().y);
+}
+void Player::setmap() {
+    if (!maptextture.loadFromFile("C:/Users/User/Desktop/gameprojtea/photo/map.png")) {
+        std::cout << "Error loading map texture" << std::endl;
+    }
+    map.setTexture(maptextture);
+}
 
 void Player::setPlayer()
 {
-    if (!playerTexture.loadFromFile("C:/Users/User/Desktop/gamenaja/main/png/playergame.png"))
+    if (!playerTexture.loadFromFile("C:/Users/User/Desktop/gameprojtea/photo/player.png"))
     {
-        std::cout << "Error loading texture: playergame.png" << std::endl;
+        std::cout << "Error loading texture: player.png" << std::endl;
     }
 
     playerSprite.setTexture(playerTexture);
@@ -16,10 +30,11 @@ void Player::setPlayer()
     playerSprite.setPosition(800.f, 450.f);
 }
 
-Player::Player() : speedPlayer(10.0f), health(100), damage(10), animationFrame(0), spriteX(0), spriteY(0)
+Player::Player() : speedPlayer(10.0f), health(100), damage(10), animationFrame(0), spriteX(0), spriteY(0) ,enemy(20.f, 20.f)
 {
     setPlayer();
-    sword.setSword("C:/Users/User/Desktop/gamenaja/main/png/sword.png");
+    setmap();
+    //setSword();
 }
 
 
@@ -29,6 +44,9 @@ Player::~Player()
 
 void Player::moveFunc()
 {
+    // Previous position before the move
+    sf::Vector2f prevPosition = playerSprite.getPosition();
+
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
     {
         playerSprite.move(speedPlayer, 0.f);
@@ -50,7 +68,30 @@ void Player::moveFunc()
         playerSprite.setTextureRect(sf::IntRect(spriteX * animationFrame, 0, spriteX, spriteY));
     }
 
+    // Check for collision with the frame
+    sf::FloatRect playerBounds = playerSprite.getGlobalBounds();
+    sf::FloatRect frameBounds(0.f, 0.f, 1600, 900);
+
+    if (!frameBounds.contains(playerBounds.left, playerBounds.top) ||
+        !frameBounds.contains(playerBounds.left + playerBounds.width, playerBounds.top) ||
+        !frameBounds.contains(playerBounds.left, playerBounds.top + playerBounds.height) ||
+        !frameBounds.contains(playerBounds.left + playerBounds.width, playerBounds.top + playerBounds.height))
+    {
+        playerSprite.setPosition(prevPosition);
+    }
+
+    if (animationClock.getElapsedTime().asMilliseconds() > 100)
+    {
+        animationFrame++;
+        if (animationFrame >= 2)
+        {
+            animationFrame = 0;
+        }
+
+        animationClock.restart();
+    }
 }
+
 
 int Player::getHealth() const
 {
@@ -62,14 +103,45 @@ void Player::takeDamage(int damage)
     health = std::max(0, health - damage);
 }
 
+void Player::swingSword()
+{
+    swordSprite.rotate(60.0f);
+    swordSprite.setPosition(playerSprite.getPosition().x + 15.f, playerSprite.getPosition().y - 100.f);
+    swordSprite.setPosition(0.f , 0.f);
+}
+
 void Player::update()
 {
     moveFunc();
+
+    sf::Vector2i mousePosition = sf::Mouse::getPosition();
+    sf::Vector2f playerPosition = playerSprite.getPosition();
+
+    float angle = std::atan2(mousePosition.y - playerPosition.y, mousePosition.x - playerPosition.x);
+    angle = angle * (180 / 3.14159265);
+
+    swordSprite.setPosition(playerPosition);
+
+    sf::Vector2f swordTipPosition = playerPosition + sf::Vector2f(15.f, -10.f);
+    swordSprite.setRotation(angle + 90.f);
+    swordSprite.setPosition(swordTipPosition);
+
+    if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+    {
+        swingSword();
+    }
+
+    setSword();
 }
 
-void Player::render(sf::RenderTarget& target)
-{
+
+
+void Player::render(sf::RenderTarget& target) {
+    target.draw(map);
     target.draw(playerSprite);
+    target.draw(swordSprite);
+    //sword.render(target);
+    //enemy.render(target);
 }
 
 
@@ -85,33 +157,21 @@ void Player::run(sf::RenderWindow& window)
                 window.close();
             }
         }
-        update(enemy);//Pass the Enemy reference to update player and check attack
+        update();//Pass the Enemy reference to update player and check attack
         window.clear();
-        render(window,enemy);//Pass the window and the enemy to render
+        render(window);//Pass the window and the enemy to render
         window.display();
     }
 }
 
-void attackEnemy(Enemy&enemy){
-    if(sf::Mouse::isButtonPressed(sf::Mouse::Left)){//Perform attack and reduce enemy health
-    enemy.takeDamage(damage);
-        if (enemy.getHealth()<=0){//If enemy health is empty, delete enemy
-            //Add code to delete the enemy
-        }
-    }
-}
-
-void update(Enemy&enemy){
-    moveFunc();
-    attackEnemy(enemy);
-
-}
-
-void render(sf::RenderTarget&target, Enemy&enemy){
-    target.draw(playerSprite);
-    sword.render(target);//Render the sword   
-    enemy.render(target);//Render the enemy as well
-}
+//void Player::attackEnemy(Enemy& enemy) {
+//    if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {//Perform attack and reduce enemy health
+//        enemy.takeDamage(damage);
+//        if (enemy.getHealth() <= 0) {//If enemy health is empty, delete enemy
+//            //Add code to delete the enemy
+//        }
+//    }
+//}
 
 sf::Vector2f Player::getPosition() const {
     return playerSprite.getPosition();
