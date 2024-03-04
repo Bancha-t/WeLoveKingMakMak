@@ -13,6 +13,9 @@ public:
 
     int getHealth() const;
     void takeDamage(int damage);
+    void attackEnemy(Enemy* target){
+        target->takeDamage(10);//Reduce the enemy's health by 10 when attacked
+    }
     void swingSword();
     void update();
     void render(sf::RenderTarget& target);
