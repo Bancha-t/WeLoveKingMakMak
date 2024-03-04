@@ -92,6 +92,15 @@ void Player::run(sf::RenderWindow& window)
     }
 }
 
+void attackEnemy(Enemy&enemy){
+    if(sf::Mouse::isButtonPressed(sf::Mouse::Left)){//Perform attack and reduce enemy health
+    enemy.takeDamage(damage);
+        if (enemy.getHealth()<=0){//If enemy health is empty, delete enemy
+            //Add code to delete the enemy
+        }
+    }
+}
+
 void update(Enemy&enemy){
     moveFunc();
     attackEnemy(enemy);
