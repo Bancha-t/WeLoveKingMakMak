@@ -1,4 +1,5 @@
 ﻿#include "Player.h"
+#include "Enemy.h"
 void Player::setSword() {
     if (!swordTexture.loadFromFile("C:/Users/User/Desktop/gameprojtea/photo/sword.png")) {
         std::cout << "Error loading sword texture" << std::endl;
@@ -164,7 +165,7 @@ void Player::run(sf::RenderWindow& window)
     }
 }
 
-//void Player::attackEnemy(Enemy& enemy) {
+//void Player::attackEnemy(Enemy* enemy) {
 //    if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {//Perform attack and reduce enemy health
 //        enemy.takeDamage(damage);
 //        if (enemy.getHealth() <= 0) {//If enemy health is empty, delete enemy
