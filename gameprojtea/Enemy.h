@@ -34,7 +34,7 @@ private:
 	int DAMAGE;
 	int POINT;
 	int NewHp;
-	int Health;
+	int health;
 	float speedenemy;
 	Texture enemytexture;
 	Sprite enemy;
