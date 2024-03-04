@@ -165,14 +165,15 @@ void Player::run(sf::RenderWindow& window)
     }
 }
 
-//void Player::attackEnemy(Enemy* enemy) {
-//    if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {//Perform attack and reduce enemy health
-//        enemy.takeDamage(damage);
-//        if (enemy.getHealth() <= 0) {//If enemy health is empty, delete enemy
-//            //Add code to delete the enemy
-//        }
-//    }
-//}
+void Player::attackEnemy(Enemy* enemy) {
+   if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {//Perform attack and reduce enemy health
+        enemy.takeDamage(damage);
+        if (enemy.getHealth() <= 0) {//If enemy health is empty, delete enemy
+           delete enemy;//Add code to delete the enemy
+           enemy=nullptr;//Set the pointer to null after deleting
+        }
+   }
+}
 
 sf::Vector2f Player::getPosition() const {
     return playerSprite.getPosition();
