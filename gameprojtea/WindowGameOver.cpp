@@ -2,6 +2,26 @@
 
 void WindowGameOver::setmenu()
 {
+    if (!font.loadFromFile("C:/Users/User/Desktop/gameprojtea/font/Sobiscuit.ttf")) {
+        std::cout << "Error loading font\n";
+    }
+    Gameover.setFont(font); 
+    Gameover.setString("Gameover");
+    Gameover.setCharacterSize(50);
+    Gameover.setPosition(800.f, 200.f);
+    Gameover.setOrigin(Regame.getLocalBounds().width / 2, Regame.getLocalBounds().height / 2); game.setOrigin(Regame.getLocalBounds().width / 2, Regame.getLocalBounds().height / 2);
+       
+    Regame.setFont(font);
+    Regame.setString("Regame");
+    Regame.setCharacterSize(50);
+    Regame.setPosition(800.f, 200.f);
+    Regame.setOrigin(Regame.getLocalBounds().width / 2, Regame.getLocalBounds().height / 2); game.setOrigin(Regame.getLocalBounds().width / 2, Regame.getLocalBounds().height / 2);
+
+    exit.setFont(font);
+    exit.setString("exit");
+    exit.setCharacterSize(50);
+    exit.setPosition(800.f, 200.f);
+    exit.setOrigin(Regame.getLocalBounds().width / 2, Regame.getLocalBounds().height / 2); game.setOrigin(Regame.getLocalBounds().width / 2, Regame.getLocalBounds().height / 2);
 
 }
 
@@ -16,9 +36,9 @@ WindowGameOver::~WindowGameOver()
 
 void WindowGameOver::render(RenderTarget& target)
 {
+    target.draw(Gameover);
     target.draw(Regame);
     target.draw(exit);
-    target.draw(BGG);
 }
 
 void WindowGameOver::run(RenderWindow& window) {

@@ -13,9 +13,8 @@ public:
 	void render(RenderTarget& target);
 	void run(RenderWindow& window);
 private:
-	Texture BGGTEXTURE;
-	Sprite BGG;
 	Font font;
+	Text Gameover;
 	Text Regame;
 	Text exit;
 
