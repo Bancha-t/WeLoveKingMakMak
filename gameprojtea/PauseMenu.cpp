@@ -10,6 +10,10 @@ void PauseMenu::setmenu()
 	Regame.setCharacterSize(50);
 	Regame.setPosition(800.f, 200.f);
     Regame.setOrigin(Regame.getLocalBounds().width / 2, Regame.getLocalBounds().height / 2);
+    if (!BGGTEXTURE.loadFromFile("C:/Users/User/Desktop/gameprojtea/photo/weloveking.jpg")) {
+        std::cout << "Error loading photo\n";
+    }
+    BGG.settexture(BGGTEXTURE);
 
     exit.setFont(font);
     exit.setString("EXIT");
@@ -29,7 +33,8 @@ PauseMenu::~PauseMenu()
 }
 
 void PauseMenu::render(RenderTarget& target)
-{
+{ 
+    target.draw(BGG);
 	target.draw(Regame);
     target.draw(exit);
 }
