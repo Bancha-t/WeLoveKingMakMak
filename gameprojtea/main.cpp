@@ -42,6 +42,7 @@ int main()
     exitOption.setOrigin(exitOption.getLocalBounds().width / 2, exitOption.getLocalBounds().height / 2);
     exitOption.setFillColor(Color::Blue);
 
+
     while (window.isOpen())
     {
         Event event;
