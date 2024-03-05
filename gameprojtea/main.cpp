@@ -10,7 +10,7 @@ int main()
 
     Font font;
     if (!font.loadFromFile("C:/Users/User/Desktop/gameprojtea/font/Sobiscuit.ttf")) {
-        std::cerr << "Error loading font\n";
+        std::cout << "Error loading font\n";
         return 1;
     }
 

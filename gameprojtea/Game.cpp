@@ -88,8 +88,16 @@ void Game::updatePoints()
 
 void Game::update() {
     while (window.pollEvent(event)) {
-        if (event.type == Event::Closed)
+        if (event.type == Event::Closed) {
             window.close();
+        }
+        else if (event.type == Event::KeyPressed)
+        {
+            if (event.key.code == Keyboard::Escape)
+            {
+                pauseMenu.run(window);
+            }
+        }
     }
 
     player.update(window);

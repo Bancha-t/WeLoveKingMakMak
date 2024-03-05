@@ -5,7 +5,7 @@
 #include <cstdlib>
 #include <ctime>
 #include <iostream>
-
+using namespace sf;
 class Point
 {
 public:
@@ -19,8 +19,9 @@ public:
     bool checkCollision(const sf::FloatRect& playerBounds);
 
 private:
-    sf::Texture pointTexture;
-    sf::Sprite pointSprite;
+    //sf::Texture pointTexture;
+    //sf::Sprite pointSprite;
+    CircleShape pointSprite;
     int scorepoint = 0;
 };
 

@@ -9,6 +9,7 @@
 #include "GameUI.h"
 #include "Point.h"
 #include "Bullet.h"
+#include "PauseMenu.h"
 using namespace sf;
 
 class Game
@@ -22,23 +23,30 @@ public:
     void update();
     void render();
     void run();
-    View view;
 private:
     RenderWindow window;
     Event event;
+    //View view;
+
     Player player;
     UIgame ui;
     Point point;
-    int playerScore;
+    Enemy enemy;
+    PauseMenu pauseMenu;
+
     std::vector<Enemy> enemies;
     std::vector<Point> points;
     std::vector<Bullet> bullets;
-    Enemy enemy;
+
+    
     sf::Clock enemySpawnClock;
-    sf::Music backgroundMusic;
     sf::Clock pointSpawnClock;
+    sf::Music backgroundMusic;
+    
+    int playerScore;
     float pointSpawnInterval = 1.0f ;
     const float enemySpawnInterval = 2.0f;
+    
     void initWindow();
     void intenemy();
 };

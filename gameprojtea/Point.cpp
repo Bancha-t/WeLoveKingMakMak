@@ -2,13 +2,16 @@
 
 Point::Point()
 {
-    if (!pointTexture.loadFromFile("C:/Users/User/Desktop/gameprojtea/photo/KANZA.png"))
-    {
-        std::cout << "Error loading texture: KANZA.png" << std::endl;
-    }
+    //if (!pointTexture.loadFromFile("C:/Users/User/Desktop/gameprojtea/photo/KANZA.png"))
+    //{
+    //    std::cout << "Error loading texture: KANZA.png" << std::endl;
+    //}
+    //pointSprite.setTexture(pointTexture);
 
-    pointSprite.setTexture(pointTexture);
-    pointSprite.setScale(0.09f, 0.09f);
+    pointSprite.setRadius(static_cast<float>(rand() % 20 + 20));
+    pointSprite.setPointCount(rand() % 100 + 3);
+    pointSprite.setFillColor(Color(rand() % 200 + 1, rand() % 255 + 2, rand() % 255 + 3, 255));
+    pointSprite.setScale(0.5f, 0.5f);
 }
 
 Point::~Point()
