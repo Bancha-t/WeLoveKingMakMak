@@ -25,18 +25,22 @@ int main()
     Texture back_texture;
     back_texture.loadFromFile("C:/Users/User/Desktop/gameprojtea/photo/welovetheking.jpg");
     Pbackground.setTexture(&back_texture);
+    Pbackground.setFillColor(Color::Blue);
 
     Text title("WELOVEKING", font, 150);
     title.setPosition(800.f, 200.f);
     title.setOrigin(title.getLocalBounds().width / 2, title.getLocalBounds().height / 2);
+    title.setFillColor(Color::Blue);
 
     Text playOption("Play", font, 100);
     playOption.setPosition(800.f, 400.f);
     playOption.setOrigin(playOption.getLocalBounds().width / 2, playOption.getLocalBounds().height / 2);
+    playOption.setFillColor(Color::Blue);
 
     Text exitOption("Exit", font, 100);
     exitOption.setPosition(800.f, 600.f);
     exitOption.setOrigin(exitOption.getLocalBounds().width / 2, exitOption.getLocalBounds().height / 2);
+    exitOption.setFillColor(Color::Blue);
 
     while (window.isOpen())
     {
