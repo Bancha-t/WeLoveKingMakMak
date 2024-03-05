@@ -17,6 +17,7 @@ private:
 	Sprite BGG;
 	Font font;
 	Text Regame;
+	Text Regamebox;
 	Text exit;
 
 	void setmenu();
