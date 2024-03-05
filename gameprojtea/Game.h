@@ -28,7 +28,6 @@ private:
     RenderWindow window;
     Event event;
     //View view;
-
     Player player;
     UIgame ui;
     Point point;

@@ -10,20 +10,22 @@ void Enemy::setenemy() {
 	enemy.setTexture(enemytexture);
 	enemy.setOrigin(0.f, 0.f);
 	enemy.setScale(0.1f, 0.1f);
+
 }
 void Enemy::intvariables() {
-	HP = rand() % 50 + 100;
-	HPMAX = 100;
 	DAMAGE = rand() % 5 + 20;
 	POINT = 1;
 	speedenemy = 2.f;
 }
+
+
 
 Enemy::Enemy(float posx, float posy)
 {
 	setenemy();
 	intvariables();
 	enemy.setPosition(posx, posy);
+
 }
 
 Enemy::~Enemy()

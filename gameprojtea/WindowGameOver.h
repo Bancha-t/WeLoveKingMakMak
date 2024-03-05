@@ -22,5 +22,3 @@ private:
 };
 
 #endif // WINDOWGAMEOVER_H
-
-

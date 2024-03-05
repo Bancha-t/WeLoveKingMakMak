@@ -18,6 +18,7 @@ public:
 	int getHealth() const;
 	sf::FloatRect getGlobalBounds() const;
 	void reduceHealth(int amount);
+
 private:
 	int HP;
 	int HPMAX;

@@ -13,6 +13,7 @@ public:
 	void render(RenderTarget& target);
 	void run(RenderWindow& window);
 private:
+	RectangleShape box;
 	Texture BGGTEXTURE; 
 	Sprite BGG;
 	Font font;

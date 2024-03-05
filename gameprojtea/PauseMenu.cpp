@@ -9,11 +9,6 @@ void PauseMenu::setmenu()
 	Regame.setString("Press Esc to Resume");
 	Regame.setCharacterSize(100);
 	Regame.setPosition(800.f, 200.f);
-    Regame.setOrigin(Regame.getLocalBounds().width / 2, Regame.getLocalBounds().height / 2);
-    if (!BGGTEXTURE.loadFromFile("C:/Users/User/Desktop/gameprojtea/photo/weloveking.jpg")) {
-        std::cout << "Error loading photo\n";
-    }
-    BGG.setTexture(BGGTEXTURE);
 
     Regamebox.setFont(font);
     Regamebox.setString("Regame");
