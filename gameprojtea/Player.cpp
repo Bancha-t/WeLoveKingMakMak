@@ -62,7 +62,7 @@ int Player::getHealth() const {
     return health;
 }
 
-void Player::updatePoints() {
+int Player::updatePoints() {
     sf::FloatRect playerBounds = getGlobalBounds();
     for (auto it = points.begin(); it != points.end();) {
         if (it->checkCollision(playerBounds)) {
@@ -73,6 +73,7 @@ void Player::updatePoints() {
             ++it;
         }
     }
+    return playerScore;
 }
 
 int Player::getScore() const {

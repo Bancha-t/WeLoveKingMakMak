@@ -15,8 +15,8 @@ public:
 
     void spawnRandom(sf::RenderWindow& window);
     void render(sf::RenderWindow& window) const;
-    int increaseScore(int& playerScore);
     bool checkCollision(const sf::FloatRect& playerBounds);
+    int increaseScore(int& playerScore);
 
 private:
     //sf::Texture pointTexture;

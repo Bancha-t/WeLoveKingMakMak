@@ -20,7 +20,7 @@ public:
     void setmap();
     void reduceHealth(int amount);
     int getHealth() const;
-    void updatePoints();
+    int updatePoints();
     int getScore() const;
     sf::FloatRect getGlobalBounds() const;
     sf::Vector2f getPosition() const;
@@ -32,13 +32,13 @@ private:
     int animationFrame;
     int spriteX;
     int spriteY;
-    Enemy enemy;
     std::vector<Enemy> enemies;
     std::vector<Point> points;
 
     RectangleShape frame;
     Texture playerTexture;
     Sprite playerSprite;
+    Enemy enemy;
     Point point;
     Texture maptextture;
     Sprite map;

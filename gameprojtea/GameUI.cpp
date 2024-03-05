@@ -40,11 +40,9 @@ void UIgame::setPlayerHealth(int health) {
 
 void UIgame::update() {
     int playerCurrentHealth = player.getHealth();
-
     setPlayerHealth(playerCurrentHealth);
 
-    int currentPlayerScore = player.getScore();
-    playerScore += point.increaseScore(currentPlayerScore);
+    playerScore = player.getScore();
 
     float scaleFactor = static_cast<float>(playerHealth) / static_cast<float>(playerMaxHealth);
     HPbar.setScale(scaleFactor, 1.f);
