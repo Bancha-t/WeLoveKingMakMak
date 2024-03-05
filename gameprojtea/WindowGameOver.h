@@ -1,5 +1,5 @@
-#ifndef PAUSEMENU_H
-#define PAUSEMENU_H
+#ifndef WINDOWGAMEOVER_H
+#define WINDOWGAMEOVER_H
 #include <SFML/Graphics.hpp>
 #include <iostream>
 using namespace sf;
@@ -21,6 +21,6 @@ private:
 	void setmenu();
 };
 
-#endif // PAUSEMENU_H
+#endif // WINDOWGAMEOVER_H
 
 

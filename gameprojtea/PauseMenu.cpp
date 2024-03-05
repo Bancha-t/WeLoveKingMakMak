@@ -20,7 +20,7 @@ void PauseMenu::setmenu()
     exit.setString("EXIT");
     exit.setCharacterSize(30);
     exit.setPosition(800.f, 500.f);
-    exit.setOrigin(Regame.getLocalBounds().width / 2, Regame.getLocalBounds().height / 2);
+    exit.setOrigin(exit.getLocalBounds().width / 2, exit.getLocalBounds().height / 2);
 
 }
 

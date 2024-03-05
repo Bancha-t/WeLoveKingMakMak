@@ -10,6 +10,7 @@
 #include "Point.h"
 #include "Bullet.h"
 #include "PauseMenu.h"
+#include "WindowGameOver.h"
 using namespace sf;
 
 class Game
@@ -33,6 +34,7 @@ private:
     Point point;
     Enemy enemy;
     PauseMenu pauseMenu;
+    WindowGameOver windowGameOver;
 
     std::vector<Enemy> enemies;
     std::vector<Point> points;

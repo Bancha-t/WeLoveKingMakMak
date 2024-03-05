@@ -128,7 +128,7 @@ void Game::update() {
 
             if (player.getHealth() <= 0) {
                 std::cout << "Game Over!" << std::endl;
-                window.close();
+                windowGameOver.run(window);
             }
 
             it = enemies.erase(it);

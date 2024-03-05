@@ -9,20 +9,19 @@ void WindowGameOver::setmenu()
     Gameover.setString("Gameover");
     Gameover.setCharacterSize(50);
     Gameover.setPosition(800.f, 200.f);
-    Gameover.setOrigin(Regame.getLocalBounds().width / 2, Regame.getLocalBounds().height / 2); game.setOrigin(Regame.getLocalBounds().width / 2, Regame.getLocalBounds().height / 2);
+    Gameover.setOrigin(Gameover.getLocalBounds().width / 2, Gameover.getLocalBounds().height / 2);
        
     Regame.setFont(font);
     Regame.setString("Regame");
     Regame.setCharacterSize(50);
-    Regame.setPosition(800.f, 200.f);
-    Regame.setOrigin(Regame.getLocalBounds().width / 2, Regame.getLocalBounds().height / 2); game.setOrigin(Regame.getLocalBounds().width / 2, Regame.getLocalBounds().height / 2);
+    Regame.setPosition(800.f, 300.f);
+    Regame.setOrigin(Regame.getLocalBounds().width / 2, Regame.getLocalBounds().height / 2);
 
     exit.setFont(font);
     exit.setString("exit");
     exit.setCharacterSize(50);
-    exit.setPosition(800.f, 200.f);
-    exit.setOrigin(Regame.getLocalBounds().width / 2, Regame.getLocalBounds().height / 2); game.setOrigin(Regame.getLocalBounds().width / 2, Regame.getLocalBounds().height / 2);
-
+    exit.setPosition(800.f, 400.f);
+    exit.setOrigin(exit.getLocalBounds().width / 2, exit.getLocalBounds().height / 2);
 }
 
 WindowGameOver::WindowGameOver()
