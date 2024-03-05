@@ -13,7 +13,8 @@ void PauseMenu::setmenu()
     if (!BGGTEXTURE.loadFromFile("C:/Users/User/Desktop/gameprojtea/photo/weloveking.jpg")) {
         std::cout << "Error loading photo\n";
     }
-    BGG.settexture(BGGTEXTURE);
+    BGG.setTexture(BGGTEXTURE);
+
 
     exit.setFont(font);
     exit.setString("EXIT");
@@ -34,12 +35,12 @@ PauseMenu::~PauseMenu()
 
 void PauseMenu::render(RenderTarget& target)
 { 
-    target.draw(BGG);
 	target.draw(Regame);
     target.draw(exit);
+    target.draw(BGG);
 }
 
-void PauseMenu::run(RenderWindow &window) {
+void PauseMenu::run(RenderWindow& window) {
     while (true) {
         window.clear();
         render(window);
@@ -48,7 +49,15 @@ void PauseMenu::run(RenderWindow &window) {
         sf::Event event;
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape) {
-                return; 
+                return;
+            }
+            if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
+                sf::Vector2f mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
+                sf::FloatRect exitBounds = exit.getGlobalBounds();
+                if (exitBounds.contains(mousePos)) {
+                    window.close();
+                    return;
+                }
             }
         }
     }
