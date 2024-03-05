@@ -15,11 +15,16 @@ void PauseMenu::setmenu()
     }
     BGG.setTexture(BGGTEXTURE);
 
+    Regamebox.setFont(font);
+    Regamebox.setString("Regame");
+    Regamebox.setCharacterSize(30);
+    Regamebox.setPosition(800.f, 400.f);
+    Regamebox.setOrigin(Regamebox.getLocalBounds().width / 2, Regamebox.getLocalBounds().height / 2);
 
     exit.setFont(font);
     exit.setString("EXIT");
     exit.setCharacterSize(30);
-    exit.setPosition(800.f, 500.f);
+    exit.setPosition(800.f, 600.f);
     exit.setOrigin(exit.getLocalBounds().width / 2, exit.getLocalBounds().height / 2);
 
 }
@@ -36,6 +41,7 @@ PauseMenu::~PauseMenu()
 void PauseMenu::render(RenderTarget& target)
 { 
 	target.draw(Regame);
+    target.draw(Regamebox);
     target.draw(exit);
     target.draw(BGG);
 }
