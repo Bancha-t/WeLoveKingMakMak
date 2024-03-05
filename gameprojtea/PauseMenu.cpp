@@ -7,7 +7,7 @@ void PauseMenu::setmenu()
 	}
 	Regame.setFont(font);
 	Regame.setString("Press Esc to Resume");
-	Regame.setCharacterSize(50);
+	Regame.setCharacterSize(100);
 	Regame.setPosition(800.f, 200.f);
     Regame.setOrigin(Regame.getLocalBounds().width / 2, Regame.getLocalBounds().height / 2);
     if (!BGGTEXTURE.loadFromFile("C:/Users/User/Desktop/gameprojtea/photo/weloveking.jpg")) {
@@ -17,13 +17,13 @@ void PauseMenu::setmenu()
 
     Regamebox.setFont(font);
     Regamebox.setString("Regame");
-    Regamebox.setCharacterSize(30);
+    Regamebox.setCharacterSize(50);
     Regamebox.setPosition(800.f, 400.f);
     Regamebox.setOrigin(Regamebox.getLocalBounds().width / 2, Regamebox.getLocalBounds().height / 2);
 
     exit.setFont(font);
     exit.setString("EXIT");
-    exit.setCharacterSize(30);
+    exit.setCharacterSize(50);
     exit.setPosition(800.f, 600.f);
     exit.setOrigin(exit.getLocalBounds().width / 2, exit.getLocalBounds().height / 2);
 
@@ -62,6 +62,13 @@ void PauseMenu::run(RenderWindow& window) {
                 sf::FloatRect exitBounds = exit.getGlobalBounds();
                 if (exitBounds.contains(mousePos)) {
                     window.close();
+                    return;
+                }
+            }
+            if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
+                sf::Vector2f mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
+                sf::FloatRect RegameboxBounds = Regamebox.getGlobalBounds();
+                if (RegameboxBounds.contains(mousePos)) {
                     return;
                 }
             }
