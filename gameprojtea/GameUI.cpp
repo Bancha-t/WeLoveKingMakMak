@@ -16,12 +16,17 @@ void UIgame::setUIgame() {
     nameplayer.setFont(font);
     nameplayer.setString("P-ploy");
     nameplayer.setFillColor(Color::Black);
-    nameplayer.setPosition(150.f, 20.f);
+    nameplayer.setPosition(150.f, 30.f);
 
+    score.setFont(font);
+    score.setFillColor(Color::Black);
+    score.setString("score");
+    score.setPosition(600.f, 30.f);
 
 }
 
-UIgame::UIgame() {
+UIgame::UIgame(const Player& player) : player(player), playerScore(0)
+{
     playerMaxHealth = 100;
     setUIgame();
 }
@@ -34,16 +39,23 @@ void UIgame::setPlayerHealth(int health) {
 }
 
 void UIgame::update() {
-    int playerCurrentHealth = 100;
+    int playerCurrentHealth = player.getHealth();
 
     setPlayerHealth(playerCurrentHealth);
+
+    int currentPlayerScore = player.getScore();
+    playerScore += point.increaseScore(currentPlayerScore);
 
     float scaleFactor = static_cast<float>(playerHealth) / static_cast<float>(playerMaxHealth);
     HPbar.setScale(scaleFactor, 1.f);
 }
 
 void UIgame::render(RenderTarget& target) {
+    update();
+    
     target.draw(HPbar);
     target.draw(nameplayer);
+    score.setString("Score: " + std::to_string(playerScore));
+    target.draw(score);
     target.draw(playertext1);
 }

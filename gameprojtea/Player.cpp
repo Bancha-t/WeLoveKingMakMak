@@ -1,13 +1,29 @@
 ﻿#include "Player.h"
 #include "Enemy.h"
-void Player::setSword() {
-    if (!swordTexture.loadFromFile("C:/Users/User/Desktop/gameprojtea/photo/sword.png")) {
+
+void Player::setWeapon(RenderWindow& window) {
+    if (!WeaponTexture.loadFromFile("C:/Users/User/Desktop/gameprojtea/photo/Bookgun.png")) {
         std::cout << "Error loading sword texture" << std::endl;
     }
-    swordSprite.setTexture(swordTexture);
-    swordSprite.setScale(0.075f, 0.075f);
-    swordSprite.setOrigin(swordTexture.getSize().x, swordTexture.getSize().y); 
-    swordSprite.setPosition(playerSprite.getPosition().x, playerSprite.getPosition().y);
+    WeaponSprite.setTexture(WeaponTexture);
+    WeaponSprite.setScale(0.1f, 0.1f);
+    WeaponSprite.setPosition(playerSprite.getPosition().x, playerSprite.getPosition().y);
+    WeaponSprite.setOrigin(WeaponSprite.getLocalBounds().width / 2, WeaponSprite.getLocalBounds().height / 2);
+    sf::Vector2i mousePosition = sf::Mouse::getPosition();
+    sf::Vector2f mousePositionInView = window.mapPixelToCoords(mousePosition);
+
+    sf::Vector2f direction = mousePositionInView - playerSprite.getPosition();
+    float length = std::sqrt(direction.x * direction.x + direction.y * direction.y);
+
+    if (length != 0)
+    {
+        direction /= length;
+    }
+
+    WeaponSprite.setPosition(playerSprite.getPosition());
+
+    float rotation = std::atan2(direction.y, direction.x) * (180.0f / static_cast<float>(3.14));
+    WeaponSprite.setRotation(rotation);
 }
 void Player::setmap() {
     if (!maptextture.loadFromFile("C:/Users/User/Desktop/gameprojtea/photo/map.png")) {
@@ -32,13 +48,36 @@ void Player::setPlayer()
     playerSprite.setPosition(800.f, 450.f);
 }
 
-Player::Player() : speedPlayer(10.0f), health(100), damage(10), animationFrame(0), spriteX(0), spriteY(0) ,enemy(0.f, 0.f)
+Player::Player() : speedPlayer(10.0f), health(100), damage(10), animationFrame(0), spriteX(0), spriteY(0), enemy(0.f, 0.f), playerScore(0)
 {
     setPlayer();
     setmap();
-    setSword();
 }
 
+void Player::reduceHealth(int amount) {
+    health -= amount;
+}
+
+int Player::getHealth() const {
+    return health;
+}
+
+void Player::updatePoints() {
+    sf::FloatRect playerBounds = getGlobalBounds();
+    for (auto it = points.begin(); it != points.end();) {
+        if (it->checkCollision(playerBounds)) {
+            it->increaseScore(playerScore);
+            it = points.erase(it);
+        }
+        else {
+            ++it;
+        }
+    }
+}
+
+int Player::getScore() const {
+    return playerScore;
+}
 
 Player::~Player()
 {
@@ -92,44 +131,39 @@ void Player::moveFunc()
     }
 }
 
-void Player::swingSword()
-{
-    swordSprite.rotate(60.0f);
-    swordSprite.setPosition(playerSprite.getPosition().x + 15.f, playerSprite.getPosition().y - 100.f);
-    swordSprite.setPosition(0.f , 0.f);
-}
-
-void Player::update()
+void Player::update(RenderWindow& window)
 {
     moveFunc();
+    updatePoints();
+    setWeapon(window);
+    sf::FloatRect playerBounds = playerSprite.getGlobalBounds();
 
-    sf::Vector2i mousePosition = sf::Mouse::getPosition();
-    sf::Vector2f playerPosition = playerSprite.getPosition();
-
-    float angle = std::atan2(mousePosition.y - playerPosition.y, mousePosition.x - playerPosition.x);
-    angle = angle * (180 / 3.14159265);
-
-    swordSprite.setPosition(playerPosition);
-
-    sf::Vector2f swordTipPosition = playerPosition + sf::Vector2f(0.f, 0.f);
-    swordSprite.setRotation(angle + 90.f);
-    swordSprite.setPosition(swordTipPosition);
-
-    if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
-    {
-        swingSword();
+    for (auto it = enemies.begin(); it != enemies.end();) {
+        sf::FloatRect enemyBounds = it->getGlobalBounds();
+        if (playerBounds.intersects(enemyBounds)) {
+            it->reduceHealth(damage);
+            if (it->getHealth() <= 0) {
+                it = enemies.erase(it);
+            }
+            else {
+                ++it;
+            }
+        }
+        else {
+            ++it;
+        }
     }
-
-    setSword();
-
 }
 
-
+sf::FloatRect Player::getGlobalBounds() const
+{
+    return playerSprite.getGlobalBounds();
+}
 
 void Player::render(sf::RenderTarget& target) {
     target.draw(map);
     target.draw(playerSprite);
-    target.draw(swordSprite);
+    target.draw(WeaponSprite);
 }
 
 
@@ -145,7 +179,7 @@ void Player::run(sf::RenderWindow& window)
                 window.close();
             }
         }
-        update();
+        update(window);
         window.clear();
         render(window);
         window.display();

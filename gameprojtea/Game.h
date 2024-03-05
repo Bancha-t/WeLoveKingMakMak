@@ -7,6 +7,8 @@
 #include "Player.h"
 #include "Enemy.h"
 #include "GameUI.h"
+#include "Point.h"
+#include "Bullet.h"
 using namespace sf;
 
 class Game
@@ -16,6 +18,7 @@ public:
     virtual ~Game();
 
     void updateenemy(const Vector2f& playerPosition);
+    void updatePoints();
     void update();
     void render();
     void run();
@@ -25,12 +28,17 @@ private:
     Event event;
     Player player;
     UIgame ui;
-    
+    Point point;
+    int playerScore;
     std::vector<Enemy> enemies;
+    std::vector<Point> points;
+    std::vector<Bullet> bullets;
     Enemy enemy;
     sf::Clock enemySpawnClock;
     sf::Music backgroundMusic;
-    const float enemySpawnInterval = 5.0f;
+    sf::Clock pointSpawnClock;
+    float pointSpawnInterval = 1.0f ;
+    const float enemySpawnInterval = 2.0f;
     void initWindow();
     void intenemy();
 };

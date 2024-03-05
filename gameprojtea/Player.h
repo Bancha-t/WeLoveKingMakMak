@@ -3,8 +3,10 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Graphics/Rect.hpp>
 #include <iostream>
+#include <vector> 
 #include <cmath>
 #include "Enemy.h"
+#include "Point.h"
 
 class Player
 {
@@ -12,14 +14,17 @@ public:
     Player();
     virtual ~Player();
 
-    void swingSword();
-    void update();
+    void update(RenderWindow& window);
     void render(sf::RenderTarget& target);
     void run(sf::RenderWindow& window);
-    void setSword();
     void setmap();
+    void reduceHealth(int amount);
+    int getHealth() const;
+    void updatePoints();
+    int getScore() const;
+    sf::FloatRect getGlobalBounds() const;
     sf::Vector2f getPosition() const;
-    sf::RectangleShape swordHitbox;
+
 private:
     float speedPlayer;
     int health;
@@ -28,17 +33,23 @@ private:
     int spriteX;
     int spriteY;
     Enemy enemy;
-    sf::Clock frameClock;
-    bool drawFrame;
-    sf::RectangleShape frame;
-    sf::Texture playerTexture;
-    sf::Sprite playerSprite;
-    sf::Texture swordTexture;
-    sf::Sprite swordSprite;
-    sf::Texture maptextture;
-    sf::Sprite map;
-    sf::Clock animationClock;
+    std::vector<Enemy> enemies;
+    std::vector<Point> points;
 
+    RectangleShape frame;
+    Texture playerTexture;
+    Sprite playerSprite;
+    Point point;
+    Texture maptextture;
+    Sprite map;
+
+    Texture WeaponTexture;
+    Sprite WeaponSprite;
+
+    Clock animationClock;
+    int playerScore;
+
+    void setWeapon(RenderWindow& window);
     void setPlayer();
     void moveFunc();
 };
